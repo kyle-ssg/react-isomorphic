@@ -50,5 +50,12 @@
     "webpack-dev-middleware": "1.7.0",
     "webpack-dev-server": "1.14.1",
     "webpack-hot-middleware": "2.12.2"
-  }
+  },
+  "keywords": [
+    "react",
+    "isomorphic",
+    "webapack",
+    "hmr",
+    "boilerplate"
+  ]
 }
