@@ -1,25 +1,18 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentTitle from 'react-document-title';
 
-const TheComponent = class extends Component {
-    displayName: 'TheComponent'
-
-    constructor (props, context) {
-        super(props, context);
-        this.state = {};
-    }
+const HomePage = class extends Component {
+    displayName: 'HomePage';
 
     render () {
         return (
-            <DocumentTitle title='My Web App'>
+            <DocumentTitle title='Hello'>
                 <div>
-                    Hi
+                    Home
                 </div>
             </DocumentTitle>
         );
     }
 };
 
-TheComponent.propTypes = {};
-
-module.exports = TheComponent;
+module.exports = HomePage;
