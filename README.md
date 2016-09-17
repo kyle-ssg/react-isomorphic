@@ -6,9 +6,8 @@ This automatically renders exactly the same React markup between client and serv
 
 ## Getting Started
 
-### Installation Web
 ```
-$ npm install
+$ git clone https://github.com/kyle-ssg/react-isomorphic.git && cd react-isomorphic && rm -rf .git && npm install && npm start
 ```
 
 ### Run Dev - Run hot reloading node server
