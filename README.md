@@ -5,9 +5,9 @@ Around 57.5KB Compressed JS.
 This automatically renders exactly the same React markup between client and server without config.
 
 ## Getting Started
-
+**This will get you all setup and running 🚀**
 ```
-$ git clone https://github.com/kyle-ssg/react-isomorphic.git && cd react-isomorphic && rm -rf .git && npm install && npm start
+git clone https://github.com/kyle-ssg/react-isomorphic.git && cd react-isomorphic && rm -rf .git && npm install && npm start
 ```
 
 ### Run Dev - Run hot reloading node server
