@@ -42,7 +42,7 @@ Static files are always served at the root, this means you just have to do ```<i
 #### Develop
 - Node server kicked off and managed by Nodemon, this only watches server related files in order to preserve hot reloading.
 - Server uses ```webpack-dev-middleware``` and ```webpack-hot-middleware```. The config (```webpack.config.dev```) takes ```main.js``` as the entry in order to compile the react app + css.
-- All requests server index.handlebars, this behaviour is controlled by ```single-page-middleware.js```
+- All requests serve index.handlebars, this behaviour is controlled by ```single-page-middleware.js```. 
 - Requests use req.url and server render components based on the configuration in ```routes.js```. The handlebars template also loads ```main.js`` in order to kick off client-side rendering. 
 
 The rest can be considered as a pretty vanilla react application. 
