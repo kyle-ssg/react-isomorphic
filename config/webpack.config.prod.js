@@ -14,7 +14,9 @@ module.exports = {
         './src/main.js',
     ],
 
+
     output: {
+        publicPath: '/',
         path: path.join(__dirname, '../build'),
         filename: '[name].[hash].js'
     },
@@ -27,24 +29,33 @@ module.exports = {
 
                 //Ensure NODE_ENV is set to production
                 new webpack.DefinePlugin({
-                    'process.env.NODE_ENV': JSON.stringify('production'),
+                    'process.env': {
+                        'NODE_ENV': JSON.stringify('production')
+                    },
                     __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
                 }),
-
-                //reduce filesize
-                new webpack.optimize.OccurenceOrderPlugin(),
 
                 //remove duplicate files
                 new webpack.optimize.DedupePlugin(),
 
                 //pull inline styles into cachebusted file
-                new ExtractTextPlugin("style.[hash].css", { allChunks: true }),
+                new ExtractTextPlugin({ filename: "style.[hash].css", allChunks: true }),
+
+                new webpack.LoaderOptionsPlugin({
+                    minimize: true,
+                    debug: false
+                }),
 
                 //Uglify
                 new webpack.optimize.UglifyJsPlugin({
                     compress: {
-                        warnings: false
-                    }
+                        warnings: false,
+                        'screw_ie8': true
+                    },
+                    output: {
+                        comments: false
+                    },
+                    sourceMap: false
                 }),
 
             ]
@@ -66,7 +77,7 @@ module.exports = {
         loaders: require('./loaders').concat([
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract("style", "css!sass")
+                loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css!sass' })
             }
         ])
     }

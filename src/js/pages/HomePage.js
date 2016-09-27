@@ -1,18 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentTitle from 'react-document-title';
 
-const HomePage = class extends Component {
-    displayName: 'HomePage';
+const HomePage = (props)=>(
+    <DocumentTitle title='Hello'>
+        <div>
+            Hoddsadsdsddmedsdsasads
+        </div>
+    </DocumentTitle>
+);
 
-    render () {
-        return (
-            <DocumentTitle title='Hello'>
-                <div>
-                    Home
-                </div>
-            </DocumentTitle>
-        );
-    }
-};
+HomePage.displayName = "HomePage";
 
 module.exports = HomePage;

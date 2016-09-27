@@ -3,7 +3,6 @@ module.exports = function(req, res, next) {
     const headers = req.headers;
     let rewriteTarget = '/index.html';
 
-
     if (req.method !== 'GET') {
         console.log(
             'Not rewriting',

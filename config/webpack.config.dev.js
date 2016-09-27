@@ -4,10 +4,10 @@ var src = path.join(__dirname, '../src') + '/';
 var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
+    devtool: 'eval',
     entry: [
-        'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
+        'react-hot-loader/patch',
         './src/main.js',
     ],
     output: {
@@ -24,7 +24,7 @@ module.exports = {
             .concat([
                 {
                     test: /\.scss$/,
-                    loaders: ['style', 'css', 'postcss', 'sass']
+                    loaders: ['style', 'css', 'sass']
                 }
             ]),
     }

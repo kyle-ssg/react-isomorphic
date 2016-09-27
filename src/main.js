@@ -6,6 +6,22 @@ import {render} from 'react-dom';
 import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 import React from 'react';
+import {AppContainer} from 'react-hot-loader';
+
 
 // Render the React application to the DOM
-render(<Router history={browserHistory} routes={routes}/>, document.getElementById('react'));//
+
+const el = <Router isClient={true} history={browserHistory} routes={routes}/>;
+const renderEl = () => {
+    render(
+        <AppContainer>
+            {el}
+        </AppContainer>,
+        document.getElementById('react')
+    );
+};
+
+renderEl();
+if (module.hot) {
+    module.hot.accept('./routes', renderEl);
+}

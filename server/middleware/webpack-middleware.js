@@ -1,3 +1,4 @@
+//Uses webpack dev + hot middleware
 import webpack from 'webpack';
 import config from '../../config/webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';

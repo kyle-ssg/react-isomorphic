@@ -7,12 +7,12 @@ import exphbs from 'express-handlebars';
 import spm from './middleware/single-page-middleware';
 import webpackMiddleware from './middleware/webpack-middleware';
 import DocumentTitle from 'react-document-title';
-
+import serverRouter from './server-router';
+import _ from 'lodash';
 const isDev = process.env.NODE_ENV !== 'production';
 const app = express();
 
-
-if (isDev) { //Hot reloading
+if (isDev) { //Serve files from src directory and use webpack-dev-server
     console.log('Enabled Webpack Hot Reloading');
     webpackMiddleware(app);
 
@@ -28,27 +28,28 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
-    match({ routes, location: req.url },
+    match({ routes, location: req.originalUrl },
         (err, redirectLocation, renderProps) => {
 
-            // in case of error display the error message
-            if (err) {
-                return res.status(500).send(err.message);
-            }
-
-            // generate the React markup for the current route
-            let markup;
-            if (renderProps) {
-                // if the current route matched we have renderProps
-                markup = renderToString(<RouterContext {...renderProps}/>);
-            } else {
-                // otherwise we can render a 404 page
-                markup = renderToString(<NotFoundPage/>);
-                res.status(404);
-            }
-
-            // render the index template with the embedded React markup and set document title
-            return res.render('index', { markup, isDev, title: DocumentTitle.rewind(), layout: false });
+            // generate the React markup for the current route. grab any initial data from server-router
+            serverRouter(_.last(renderProps.routes), renderProps.params)
+                .then((params)=> {
+                    let markup;
+                    console.log('rendering');
+                    try {
+                        markup = renderToString(<RouterContext {...renderProps}
+                                                               params={Object.assign({}, params, renderProps.params)}/>);
+                        return res.render('index', {
+                            params: JSON.stringify(params),
+                            markup,
+                            isDev,
+                            title: DocumentTitle.rewind(),
+                            layout: false
+                        });
+                    } catch (e) {
+                        console.log(e);
+                    }
+                });
         }
     );
 });

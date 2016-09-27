@@ -9,6 +9,10 @@
 <body>
 <div id="react">{{{markup}}}</div>
 
+{{#if params}}
+    <script id="params" type="application/json">{{{params}}}</script>
+{{/if}}
+
 {{#if isDev}}
     <!--This is inserted by webpack in production-->
     <script src="/build/main.js"></script>

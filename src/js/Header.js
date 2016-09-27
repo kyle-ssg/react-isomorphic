@@ -16,6 +16,9 @@ const Header = class extends Component {
                         <li className="nav-item">
                             <Link activeClassName="active" to="/page2" className="nav-link" href="#">404</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link activeClassName="active" to="/client-server/1" className="nav-link" href="#">Client/Server</Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
